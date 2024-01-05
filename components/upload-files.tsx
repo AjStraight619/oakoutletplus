@@ -25,12 +25,14 @@ export default function UploadFiles() {
   return (
     <div className="flex flex-row gap-2 items-center justify-start">
       <Input
+        onChange={handleFileChange}
         ref={fileRef}
         name="images"
         type="file"
         accept="image/*"
         multiple
         hidden
+        style={{ display: "none" }}
       />
       {files.length === 0 ? (
         <>
@@ -56,7 +58,6 @@ export default function UploadFiles() {
           ))}
         </div>
       )}
-      <FaPaperclip onClick={handleClick} className="w-5 h-5" />
     </div>
   );
 }

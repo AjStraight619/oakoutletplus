@@ -7,3 +7,8 @@ export type ProjectData = {
   description: string;
   imageUrls: string[];
 };
+
+export type FileWithPreview = {
+  file: File;
+  previewUrl: string;
+};

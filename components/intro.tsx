@@ -38,7 +38,7 @@ export default function Intro() {
         viewport={{
           once: true,
         }}
-        className="text-5xl rounded-lg font-bold text-center  text-gray-800 hover:text-gray-600 transition-colors duration-300"
+        className="text-5xl sm:text-2xl rounded-lg font-bold text-center  text-gray-800 hover:text-gray-600 transition-colors duration-300"
       >
         Oak Outlet Plus
       </motion.h1>

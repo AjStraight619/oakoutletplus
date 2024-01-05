@@ -1,14 +1,16 @@
+import Contact from "@/components/contact";
 import Header from "@/components/header";
+import Intro from "@/components/intro";
+import Projects from "@/components/projects";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <h1 className="text-5xl font-bold text-center text-primary">
-          Oak Outlet Plus
-        </h1>
-        <p className="text-2xl text-center text-secondary">Coming soon!</p>
+      <main className="flex  flex-col items-center justify-between p-24">
+        <Intro />
+        <Projects />
+        <Contact />
       </main>
     </>
   );

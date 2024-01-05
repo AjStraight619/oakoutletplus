@@ -7,13 +7,18 @@ export const links = [
     name: "About",
     hash: "#about",
   },
+  // {
+  //   name: "Refinishes",
+  //   hash: "#refinishes",
+  // },
+  // {
+  //   name: "Remodels",
+  //   hash: "#remodels",
+  // },
+
   {
-    name: "Refinishes",
-    hash: "#refinishes",
-  },
-  {
-    name: "Remodels",
-    hash: "#remodels",
+    name: "Projects",
+    hash: "#projects",
   },
 
   {

@@ -12,3 +12,20 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model Project {
+  id   String @id @default(cuid())
+  type ProjectType
+  imageUrls String[]
+  description String?
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+
+enum ProjectType {
+  Refinish
+  Remodel
+  Other
+}

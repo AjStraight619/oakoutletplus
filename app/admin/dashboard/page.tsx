@@ -1,3 +1,4 @@
+import { getSession } from '@/auth';
 import NewProject from '@/components/dashboard/new-project';
 import Projects from '@/components/projects/projects';
 import { Separator } from '@/components/ui/separator';
@@ -10,6 +11,9 @@ type AdminPageProps = {
 
 export default async function AdminPage({ searchParams }: AdminPageProps) {
   const projectType = searchParams?.projectType;
+  const session = await getSession();
+  console.log('Session in dashboard page:');
+  console.log(JSON.stringify(session, null, 2));
 
   return (
     <div className="flex flex-col min-h-screen p-12 w-full gap-y-2">

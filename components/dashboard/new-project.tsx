@@ -24,6 +24,7 @@ import { Textarea } from '../ui/textarea';
 import SubmitButton from '../ui/submit-button';
 import { wait } from '@/lib/utils';
 import { addProject } from '@/actions/project';
+import { Input } from '../ui/input';
 
 type ProjectType = 'Refinish' | 'Remodel' | 'Other';
 const MAX_CHAR_COUNT = 150;
@@ -31,6 +32,7 @@ const MAX_CHAR_COUNT = 150;
 export default function NewProject() {
   const [projectType, setProjectType] = useState<ProjectType>('Refinish');
   const [description, setDescription] = useState('');
+  const [title, setTitle] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [charCount, setCharCount] = useState(MAX_CHAR_COUNT);
@@ -38,6 +40,10 @@ export default function NewProject() {
 
   const action = async (formData: FormData) => {
     setError('');
+    if (!title.trim()) {
+      setError('Project must contain title');
+      return;
+    }
     formData.append('projectType', projectType as string);
     await addProject(formData);
     await wait(2000);
@@ -85,12 +91,24 @@ export default function NewProject() {
             </Select>
           </div>
           <div className="space-y-2">
+            <Label htmlFor="title">Project Title</Label>
+
+            <Input
+              id="title"
+              name="title"
+              placeholder="Project 1"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
             <Label htmlFor="description">
               Project Description{' '}
               <span className="text-muted-foreground"> (Optional)</span>
             </Label>
             <div className="relative">
               <Textarea
+                id="description"
                 value={description}
                 onChange={e => handleDescriptionChange(e.target.value)}
                 name="description"

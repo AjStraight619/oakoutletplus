@@ -6,7 +6,11 @@ type ProjectsProps = {
 };
 
 export default async function Projects({ projectType }: ProjectsProps) {
-  const projects = await db.project.findMany();
+  const projects = await db.project.findMany({
+    include: {
+      imageUrls: true,
+    },
+  });
 
   console.log('Projects: ', projects);
 

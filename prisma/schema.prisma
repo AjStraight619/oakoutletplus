@@ -20,13 +20,13 @@ model Project {
   id          String          @id @default(cuid())
   type        ProjectType
   title       String
-  imageUrls   ProjectImages[]
+  imageUrls   ProjectImage[]
   description String?         @db.Text
   updatedAt   DateTime        @updatedAt
   createdAt   DateTime        @default(now())
 }
 
-model ProjectImages {
+model ProjectImage {
   id          String     @id @default(cuid())
   imageKey    String
   imageUrl    String
@@ -34,7 +34,7 @@ model ProjectImages {
   pairId      String?    
   standalone  Boolean    @default(false) 
   projectId   String
-  project     Project    @relation(fields: [projectId], references: [id])
+  project     Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
   updatedAt   DateTime   @updatedAt
   createdAt   DateTime   @default(now())
 }
@@ -48,4 +48,5 @@ enum ProjectType {
 enum ImageType {
   Before
   After
+  StandAlone
 }

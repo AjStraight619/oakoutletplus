@@ -1,0 +1,23 @@
+import type { FromSchema } from 'json-schema-to-ts';
+import * as schemas from './schemas';
+
+export type V3BusinessReviewHighlightsMetadataParam = FromSchema<typeof schemas.V3BusinessReviewHighlights.metadata>;
+export type V3BusinessReviewHighlightsResponse200 = FromSchema<typeof schemas.V3BusinessReviewHighlights.response['200']>;
+export type V3BusinessReviewHighlightsResponse400 = FromSchema<typeof schemas.V3BusinessReviewHighlights.response['400']>;
+export type V3BusinessReviewHighlightsResponse401 = FromSchema<typeof schemas.V3BusinessReviewHighlights.response['401']>;
+export type V3BusinessReviewHighlightsResponse403 = FromSchema<typeof schemas.V3BusinessReviewHighlights.response['403']>;
+export type V3BusinessReviewHighlightsResponse404 = FromSchema<typeof schemas.V3BusinessReviewHighlights.response['404']>;
+export type V3BusinessReviewHighlightsResponse413 = FromSchema<typeof schemas.V3BusinessReviewHighlights.response['413']>;
+export type V3BusinessReviewHighlightsResponse429 = FromSchema<typeof schemas.V3BusinessReviewHighlights.response['429']>;
+export type V3BusinessReviewHighlightsResponse500 = FromSchema<typeof schemas.V3BusinessReviewHighlights.response['500']>;
+export type V3BusinessReviewHighlightsResponse503 = FromSchema<typeof schemas.V3BusinessReviewHighlights.response['503']>;
+export type V3BusinessReviewsMetadataParam = FromSchema<typeof schemas.V3BusinessReviews.metadata>;
+export type V3BusinessReviewsResponse200 = FromSchema<typeof schemas.V3BusinessReviews.response['200']>;
+export type V3BusinessReviewsResponse400 = FromSchema<typeof schemas.V3BusinessReviews.response['400']>;
+export type V3BusinessReviewsResponse401 = FromSchema<typeof schemas.V3BusinessReviews.response['401']>;
+export type V3BusinessReviewsResponse403 = FromSchema<typeof schemas.V3BusinessReviews.response['403']>;
+export type V3BusinessReviewsResponse404 = FromSchema<typeof schemas.V3BusinessReviews.response['404']>;
+export type V3BusinessReviewsResponse413 = FromSchema<typeof schemas.V3BusinessReviews.response['413']>;
+export type V3BusinessReviewsResponse429 = FromSchema<typeof schemas.V3BusinessReviews.response['429']>;
+export type V3BusinessReviewsResponse500 = FromSchema<typeof schemas.V3BusinessReviews.response['500']>;
+export type V3BusinessReviewsResponse503 = FromSchema<typeof schemas.V3BusinessReviews.response['503']>;

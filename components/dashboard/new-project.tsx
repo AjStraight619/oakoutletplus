@@ -22,12 +22,13 @@ import {
 } from '../ui/select';
 import { Textarea } from '../ui/textarea';
 import SubmitButton from '../ui/submit-button';
-import { wait } from '@/lib/utils';
+// import { wait } from '@/lib/utils';
 import { addProject } from '@/actions/project';
 import { Input } from '../ui/input';
+import { MAX_CHAR_COUNT } from '@/lib/constants';
+import { useCharCount } from '@/hooks/useCharCount';
 
 type ProjectType = 'Refinish' | 'Remodel' | 'Other';
-const MAX_CHAR_COUNT = 150;
 
 export default function NewProject() {
   const [projectType, setProjectType] = useState<ProjectType>('Refinish');
@@ -35,8 +36,10 @@ export default function NewProject() {
   const [title, setTitle] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [charCount, setCharCount] = useState(MAX_CHAR_COUNT);
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const { charCount, handleCharCountChange } = useCharCount(MAX_CHAR_COUNT);
 
   const action = async (formData: FormData) => {
     setError('');
@@ -46,13 +49,13 @@ export default function NewProject() {
     }
     formData.append('projectType', projectType as string);
     await addProject(formData);
-    await wait(2000);
+    // await wait(2000);
     setIsDialogOpen(false);
   };
 
   const handleDescriptionChange = (input: string) => {
     setDescription(input);
-    setCharCount(MAX_CHAR_COUNT - input.length);
+    handleCharCountChange(input);
   };
 
   return (

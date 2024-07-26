@@ -1,0 +1,1008 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Reviews",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.yelp.com"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "description": "To authenticate API calls with the API Key, set the Authorization HTTP header value as `Bearer API_KEY`.\n\nExample: `Bearer 23813239889e947efd3e787cc41b0b839f442a85c5bfd30bd4b9a85ec3a54d5cae4d52b37ff52e64deb9c83bd04883812a6cebde04f2f25752f31be0ac74b514`.\n\nYou can create or find your API Key at [yelp.com](https://www.yelp.com/developers/v3/manage_app).\n",
+        "in": "header"
+      },
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {}
+      },
+      "basic": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
+  "paths": {
+    "/v3/businesses/{business_id_or_alias}/reviews": {
+      "get": {
+        "summary": "Reviews",
+        "tags": [
+          "Reviews"
+        ],
+        "description": "This endpoint returns up to three review excerpts for a given business ordered by <a href=\"https://www.yelp-support.com/article/How-is-the-order-of-reviews-determined?\" target=\"_blank\">Yelp's default sort order</a>.\n\n**Note:** at this time, the API does not return businesses without any reviews.\n\nTo use this endpoint, make the GET request to the following URL with the ID of the business you want to get reviews for.\nNormally, you'll get the Business ID from <a href=\"https://docs.developer.yelp.com/reference/v3_business_search\" target=\"_blank\">/v3/businesses/search</a>,\n<a href=\"https://docs.developer.yelp.com/reference/v3_business_phone_search\" target=\"_blank\">/v3/businesses/search/phone</a>, <a href=\"https://docs.developer.yelp.com/reference/v3_transaction_search\" target=\"_blank\">/v3/transactions/{transaction_type}/search</a> or\n<a href=\"https://docs.developer.yelp.com/reference/v3_autocomplete\" target=\"_blank\">/v3/autocomplete</a>.\n",
+        "operationId": "v3_business_reviews",
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "name": "business_id_or_alias",
+            "description": "A unique identifier for a Yelp Business. Can be either a 22-character Yelp Business ID, or a Yelp Business Alias.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "required": false,
+            "name": "locale",
+            "description": "Locale code in the format of {language code}_{country code}. See the [list of supported locales](https://docs.developer.yelp.com/docs/resources-supported-locales).\n",
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z]{2,3}_[A-Z]{2}$"
+            }
+          },
+          {
+            "in": "query",
+            "required": false,
+            "name": "offset",
+            "description": "Offset the list of returned results by this amount.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1000
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of reviews to return.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 0,
+              "maximum": 50
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "Sort reviews by.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "yelp_sort",
+              "enum": [
+                "yelp_sort"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns up to three review excerpts for the given business.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "total",
+                    "reviews",
+                    "possible_languages"
+                  ],
+                  "properties": {
+                    "total": {
+                      "type": "integer",
+                      "description": "Total number of reviews returned"
+                    },
+                    "reviews": {
+                      "type": "array",
+                      "description": "List of reviews",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "id",
+                          "url",
+                          "text",
+                          "rating",
+                          "time_created",
+                          "user"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Unique Id of the review"
+                          },
+                          "url": {
+                            "type": "string",
+                            "description": "Yelp URL of the review"
+                          },
+                          "text": {
+                            "type": "string",
+                            "description": "Content of the review."
+                          },
+                          "rating": {
+                            "type": "number",
+                            "format": "int32",
+                            "description": "Rating provided as part of the review"
+                          },
+                          "time_created": {
+                            "type": "string",
+                            "description": "Time at which the comment was created"
+                          },
+                          "user": {
+                            "description": "User who created the review",
+                            "type": "object",
+                            "required": [
+                              "id",
+                              "profile_url",
+                              "name"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "description": "The ID of the user"
+                              },
+                              "profile_url": {
+                                "type": "string",
+                                "description": "The URL of the user's profile"
+                              },
+                              "image_url": {
+                                "type": "string",
+                                "description": "URL of the user's profile photo.",
+                                "nullable": true
+                              },
+                              "name": {
+                                "type": "string",
+                                "description": "User screen name (first name, and first initial of last name when present)."
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "possible_languages": {
+                      "type": "array",
+                      "description": "A list of languages for which the business has at least one review.",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Result": {
+                    "value": {
+                      "possible_languages": [
+                        "en"
+                      ],
+                      "reviews": [
+                        {
+                          "id": "xAG4O7l-t1ubbwVAlPnDKg",
+                          "url": "https://www.yelp.com/biz/la-palma-mexicatessen-san-francisco?hrid=hp8hAJ-AnlpqxCCu7kyCWA&adjust_creative=0sidDfoTIHle5vvHEBvF0w&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_reviews&utm_source=0sidDfoTIHle5vvHEBvF0w",
+                          "text": "Went back again to this place since the last time i visited the bay area 5 months ago, and nothing has changed. Still the sketchy Mission, Still the cashier...",
+                          "rating": 5,
+                          "time_created": "2016-08-29 00:41:13",
+                          "user": {
+                            "id": "W8UK02IDdRS2GL_66fuq6w",
+                            "profile_url": "https://www.yelp.com/user_details?userid=W8UK02IDdRS2GL_66fuq6w",
+                            "image_url": "https://s3-media3.fl.yelpcdn.com/photo/iwoAD12zkONZxJ94ChAaMg/o.jpg",
+                            "name": "Ella A."
+                          }
+                        },
+                        {
+                          "id": "1JNmYjJXr9ZbsfZUAgkeXQ",
+                          "url": "https://www.yelp.com/biz/la-palma-mexicatessen-san-francisco?hrid=fj87uymFDJbq0Cy5hXTHIA&adjust_creative=0sidDfoTIHle5vvHEBvF0w&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_reviews&utm_source=0sidDfoTIHle5vvHEBvF0w",
+                          "text": "The \"restaurant\" is inside a small deli so there is no sit down area. Just grab and go.\n\nInside, they sell individually packaged ingredients so that you can...\n",
+                          "rating": 4,
+                          "time_created": "2016-09-28 08:55:29",
+                          "user": {
+                            "id": "rk-MwIUejOj6LWFkBwZ98Q",
+                            "profile_url": "https://www.yelp.com/user_details?userid=rk-MwIUejOj6LWFkBwZ98Q",
+                            "image_url": "",
+                            "name": "Yanni L."
+                          }
+                        },
+                        {
+                          "id": "SIoiwwVRH6R2s2ipFfs4Ww",
+                          "url": "https://www.yelp.com/biz/la-palma-mexicatessen-san-francisco?hrid=m_tnQox9jqWeIrU87sN-IQ&adjust_creative=0sidDfoTIHle5vvHEBvF0w&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_reviews&utm_source=0sidDfoTIHle5vvHEBvF0w",
+                          "text": "Dear Mission District,\n\nI miss you and your many delicious late night food establishments and vibrant atmosphere.  I miss the way you sound and smell on a...\n",
+                          "rating": 4,
+                          "time_created": "2016-08-10 07:56:44",
+                          "user": {
+                            "id": "rpOyqD_893cqmDAtJLbdog",
+                            "profile_url": "https://www.yelp.com/user_details?userid=rpOyqD_893cqmDAtJLbdog",
+                            "image_url": "",
+                            "name": "Suavecito M."
+                          }
+                        }
+                      ],
+                      "total": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Message varies depending on failure scenario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid Request": {
+                    "value": {
+                      "error": {
+                        "code": "INVALID_REQUEST",
+                        "description": "Invalid Request"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The API key has either expired or doesn't have the required scopes to query this endpoint.\n\n| code  | description |\n| ------------- | ------------- |\n| UNAUTHORIZED_API_KEY  | The API key provided is not currently able to query this endpoint.  |\n| TOKEN_INVALID  | Invalid API key or authorization header.  |\n",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "error": {
+                        "code": "UNAUTHORIZED_API_KEY",
+                        "description": "The API key provided is not currently able to query this endpoint."
+                      }
+                    }
+                  },
+                  "Invalid Token": {
+                    "value": {
+                      "error": {
+                        "code": "TOKEN_INVALID",
+                        "description": "Invalid API key or authorization header."
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The API key provided is not currently able to query this endpoint.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Authorization Error": {
+                    "value": {
+                      "error": {
+                        "code": "AUTHORIZATION_ERROR",
+                        "description": "Authorization Error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource Not Found": {
+                    "value": {
+                      "error": {
+                        "code": "NOT_FOUND",
+                        "description": "Resource Not Found"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "The length of the request exceeded the maximum allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Payload Too Large": {
+                    "value": {
+                      "error": {
+                        "code": "PAYLOAD_TOO_LARGE",
+                        "description": "Payload Too Large"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "You have either exceeded your daily quota, or have exceeded the queries-per-second limit for this endpoint. Try reducing the rate at which you make queries.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Rate limited": {
+                    "value": {
+                      "error": {
+                        "code": "TOO_MANY_REQUESTS_PER_SECOND",
+                        "description": "You have exceeded the queries-per-second limit for this endpoint. Try reducing the rate at which you make queries."
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Internal Server Error": {
+                    "value": {
+                      "error": {
+                        "code": "INTERNAL_ERROR",
+                        "description": "Something went wrong internally, please try again later."
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Service Unavailable": {
+                    "value": {
+                      "error": {
+                        "code": "SERVICE_UNAVAILABLE",
+                        "description": "Service Unavailable"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/businesses/{business_id_or_alias}/review_highlights": {
+      "get": {
+        "summary": "Review Highlights",
+        "tags": [
+          "Reviews"
+        ],
+        "description": "Return a business's review highlights\n",
+        "operationId": "v3_business_review_highlights",
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "name": "business_id_or_alias",
+            "description": "A unique identifier for a Yelp Business. Can be either a 22-character Yelp Business ID, or a Yelp Business Alias.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "required": false,
+            "description": "Number of review highlights per business.\nA maximum of 5 highlights will be returned.\n",
+            "schema": {
+              "type": "integer",
+              "default": 3
+            }
+          },
+          {
+            "in": "query",
+            "required": false,
+            "name": "locale",
+            "description": "Locale code in the format of {language code}_{country code}. See the [list of supported locales](https://docs.developer.yelp.com/docs/resources-supported-locales).\n",
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z]{2,3}_[A-Z]{2}$"
+            }
+          },
+          {
+            "in": "query",
+            "required": false,
+            "name": "device_platform",
+            "description": "Determines the platform for mobile_link",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "android",
+                "ios",
+                "mobile-generic"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns review highlights.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "review_highlights"
+                  ],
+                  "properties": {
+                    "review_highlights": {
+                      "type": "array",
+                      "description": "List of Highlights",
+                      "items": {
+                        "type": "object",
+                        "required": [
+                          "photo",
+                          "sentence",
+                          "review_count"
+                        ],
+                        "properties": {
+                          "photo": {
+                            "type": "string",
+                            "description": "A link to the corresponding photo for the review highlight"
+                          },
+                          "sentence": {
+                            "type": "string",
+                            "description": "Selected highlight. The highlighted worked is denoted by [[HIGHLIGHT]] and [[ENDHIGHLIGHT]]"
+                          },
+                          "review_count": {
+                            "type": "integer",
+                            "description": "How many reviews mention this highlight"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Result": {
+                    "value": {
+                      "review_highlights": [
+                        {
+                          "photo": "https://s3-media2.fl.yelpcdn.com/bphoto/A--1nc2o5dcRqvcqosBjlQ/o.jpg",
+                          "sentence": "Better than Roam Artisan Burger's and Barney's [[HIGHLIGHT]]Burgers[[ENDHIGHLIGHT]] my go to when I want a good burger.",
+                          "review_count": 573
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request. Message varies depending on failure scenario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Invalid Request": {
+                    "value": {
+                      "error": {
+                        "code": "INVALID_REQUEST",
+                        "description": "Invalid Request"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The API key has either expired or doesn't have the required scopes to query this endpoint.\n\n| code  | description |\n| ------------- | ------------- |\n| UNAUTHORIZED_API_KEY  | The API key provided is not currently able to query this endpoint.  |\n| TOKEN_INVALID  | Invalid API key or authorization header.  |\n",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Unauthorized": {
+                    "value": {
+                      "error": {
+                        "code": "UNAUTHORIZED_API_KEY",
+                        "description": "The API key provided is not currently able to query this endpoint."
+                      }
+                    }
+                  },
+                  "Invalid Token": {
+                    "value": {
+                      "error": {
+                        "code": "TOKEN_INVALID",
+                        "description": "Invalid API key or authorization header."
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The API key provided is not currently able to query this endpoint.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Authorization Error": {
+                    "value": {
+                      "error": {
+                        "code": "AUTHORIZATION_ERROR",
+                        "description": "Authorization Error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Resource Not Found": {
+                    "value": {
+                      "error": {
+                        "code": "NOT_FOUND",
+                        "description": "Resource Not Found"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "The length of the request exceeded the maximum allowed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Payload Too Large": {
+                    "value": {
+                      "error": {
+                        "code": "PAYLOAD_TOO_LARGE",
+                        "description": "Payload Too Large"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "You have either exceeded your daily quota, or have exceeded the queries-per-second limit for this endpoint. Try reducing the rate at which you make queries.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Rate limited": {
+                    "value": {
+                      "error": {
+                        "code": "TOO_MANY_REQUESTS_PER_SECOND",
+                        "description": "You have exceeded the queries-per-second limit for this endpoint. Try reducing the rate at which you make queries."
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Internal Server Error": {
+                    "value": {
+                      "error": {
+                        "code": "INTERNAL_ERROR",
+                        "description": "Something went wrong internally, please try again later."
+                      }
+                    }
+                  }
+                },
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "description"
+                      ],
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "description": "The error code."
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "The description of the error."
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Service Unavailable": {
+                    "value": {
+                      "error": {
+                        "code": "SERVICE_UNAVAILABLE",
+                        "description": "Service Unavailable"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "headers": [],
+    "explorer-enabled": true,
+    "proxy-enabled": false,
+    "samples-enabled": true
+  }
+}

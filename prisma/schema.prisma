@@ -20,7 +20,7 @@ model Project {
   id          String          @id @default(cuid())
   type        ProjectType
   title       String
-  imageUrls   ProjectImage[]
+  images   ProjectImage[]
   description String?         @db.Text
   updatedAt   DateTime        @updatedAt
   createdAt   DateTime        @default(now())

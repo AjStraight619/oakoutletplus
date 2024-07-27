@@ -9,12 +9,12 @@ import { Toaster } from 'sonner';
 import Navbar from '@/components/landing-page/navbar';
 import Footer from '@/components/common/footer';
 import { ThemeProvider } from './provider';
+import { sharedMetadata } from '@/lib/shared-metadata';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Oak Outlet Plus',
-  description: 'Kitchen Remodeling and Refinishing Company',
+  ...sharedMetadata,
 };
 
 export default function RootLayout({

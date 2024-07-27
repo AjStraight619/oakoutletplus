@@ -26,7 +26,7 @@ import {
 import EditProject from '../dashboard/edit-project';
 
 type ProjectProps = {
-  project: PrismaProject & { imageUrls: PrismaProjectImage[] };
+  project: PrismaProject & { images: PrismaProjectImage[] };
 };
 
 const Project = ({ project }: ProjectProps) => {

@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { ImageType, ProjectType } from '@prisma/client';
+import { ProjectType } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { utapi } from '@/server/uploadthing';
 
@@ -35,7 +35,7 @@ export async function deleteProject(projectId: string) {
         id: projectId,
       },
       include: {
-        imageUrls: {
+        images: {
           select: {
             imageKey: true,
           },
@@ -45,7 +45,7 @@ export async function deleteProject(projectId: string) {
 
     if (!proj) return;
 
-    const imageKeys = proj.imageUrls.map(image => image.imageKey);
+    const imageKeys = proj.images.map(image => image.imageKey);
 
     console.log('Image keys: ', imageKeys);
 

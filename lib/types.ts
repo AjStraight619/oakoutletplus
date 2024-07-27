@@ -7,7 +7,7 @@ export type PairedProjectImages = {
 };
 
 export type PrismaProject = {
-  project: PrismaProject & { imageUrls: PrismaProjectImage[] };
+  project: PrismaProject & { images: PrismaProjectImage[] };
 };
 
 export type GroupedObject<T> = Record<string, T[]>;
@@ -16,4 +16,10 @@ export type GroupedArray<T> = { pairId: string; items: T[] }[];
 export type FlattenedImage = {
   pairId: string;
   image: ProjectImage;
+};
+
+export type Result<T> = {
+  success: boolean;
+  message: string;
+  data?: T;
 };

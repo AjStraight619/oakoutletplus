@@ -34,9 +34,9 @@ export const sortPairedImages = (
 };
 
 export const groupProjectImagesByPairId = (
-  project: Project & { imageUrls: ProjectImage[] },
+  project: Project & { images: ProjectImage[] },
 ): Record<string, ProjectImage[]> => {
-  const filteredImages = project.imageUrls.filter(
+  const filteredImages = project.images.filter(
     ({ pairId }) => pairId !== null && pairId !== undefined,
   );
 

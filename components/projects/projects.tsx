@@ -9,7 +9,7 @@ function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 }
 
-type PrismaProject = DbProject & { imageUrls: ProjectImage[] };
+type PrismaProject = DbProject & { images: ProjectImage[] };
 
 function categorizeProjects(projects: PrismaProject[]) {
   const now = new Date();
@@ -51,7 +51,7 @@ const Projects = async ({
       type: (projType as unknown as ProjectType) ?? 'Refinish',
     },
     include: {
-      imageUrls: true,
+      images: true,
     },
   });
 

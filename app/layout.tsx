@@ -44,7 +44,9 @@ export default function RootLayout({
 
           <Navbar />
           <Toaster />
-          <main className="flex-grow">{children}</main>
+          <main className="flex-grow">
+            <div className="pt-16">{children}</div>
+          </main>
           <Footer />
         </ThemeProvider>
       </body>

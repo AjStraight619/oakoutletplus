@@ -21,6 +21,7 @@ const Footer = () => {
   const mobileMapUrl = `geo:0,0?q=790+Palomar+St,+Ste+B,+Chula+Vista,+CA+91911`;
   // Fallback URL for other devices
   const defaultMapUrl = `https://www.google.com/maps/search/?api=1&query=790+Palomar+St,+Ste+B,+Chula+Vista,+CA+91911`;
+
   if (pathname.includes('/admin')) return null;
   return (
     <footer className="bg-primary text-white py-8">
@@ -58,22 +59,37 @@ const Footer = () => {
             <ul className="flex space-x-4">
               <li>
                 <a href="#" className="hover:underline">
-                  <FaFacebook className="text-blue-600" size={24} />
+                  <FaFacebook style={{ color: '#1877F2' }} size={24} />
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:underline">
-                  <FaTwitter className="text-blue-400" size={24} />
+                  <FaTwitter
+                    style={{
+                      color: '#00aced',
+                    }}
+                    size={24}
+                  />
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:underline">
-                  <FaInstagram className="text-pink-600" size={24} />
+                  <FaInstagram
+                    style={{
+                      color: '#cd486b',
+                    }}
+                    size={24}
+                  />
                 </a>
               </li>
               <li>
                 <a href="#" className="hover:underline">
-                  <FaLinkedin className="text-blue-700" size={24} />
+                  <FaLinkedin
+                    style={{
+                      color: '#0a66c2',
+                    }}
+                    size={24}
+                  />
                 </a>
               </li>
             </ul>

@@ -57,12 +57,12 @@ export default async function Home() {
   console.log('Images: ', images);
 
   return (
-    <main className="relative flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
+    <div className="relative flex items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
       <div className="max-w-7xl w-full">
         <Navbar />
         <Hero />
         <InfiniteImages />
       </div>
-    </main>
+    </div>
   );
 }

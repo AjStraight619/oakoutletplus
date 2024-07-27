@@ -27,25 +27,65 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const apiKey = process.env.YELP_API_KEY!;
-  console.log('API KEY: ', apiKey);
-  const url =
-    'https://api.yelp.com/v3/businesses/oak-outlet-plus-chula-vista-2';
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${process.env.YELP_API_KEY!}`,
-    },
-  };
+  //   const apiKey = process.env.GOOGLE_API_KEY!;
+  //   const placeId =
+  //     'EjA3OTAgUGFsb21hciBTdCBzdGUgYiwgQ2h1bGEgVmlzdGEsIENBIDkxOTExLCBVU0EiIRofChYKFAoSCcGOy-QsTNmAEWtFFyEX6c8REgVzdGUgYg';
 
-  await fetch(url, {
-    ...options,
-    next: { revalidate: 604800 },
-  })
-    .then(res => res.json())
-    .then(json => console.log(json))
-    .catch(err => console.error('error:' + err));
+  //   console.log('API KEY: ', apiKey);
+
+  //   const searchUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,formatted_phone_number&key=${apiKey}
+  // `;
+
+  //   try {
+  //     const response = await fetch(searchUrl, {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'X-Goog-Api-Key': apiKey,
+  //         'X-Goog-FieldMask': 'name,rating,review',
+  //       },
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+  //     const data = await response.json();
+  //     console.log('Data', JSON.stringify(data, null, 4));
+  //   } catch (err) {
+  //     console.error('Error fetching info:', err);
+  //   }
+
+  // const url =
+  //   'https://api.yelp.com/v3/businesses/GRNTOamiFI-6TDOm2_Wpd/reviews?limit=20&sort_by=yelp_sort';
+  // const apiKey = process.env.YELP_API_KEY;
+
+  // if (!apiKey) {
+  //   throw new Error('YELP_API_KEY is not set');
+  // }
+
+  // const options = {
+  //   method: 'GET',
+  //   headers: {
+  //     accept: 'application/json',
+  //     Authorization: `Bearer ${apiKey}`,
+  //   },
+  // };
+
+  // try {
+  //   const response = await fetch(url, options);
+
+  //   if (!response.ok) {
+  //     const errorDetails = await response.json();
+  //     throw new Error(
+  //       `HTTP error! status: ${response.status}, message: ${
+  //         response.statusText
+  //       }, details: ${JSON.stringify(errorDetails)}`,
+  //     );
+  //   }
+
+  //   const data = await response.json();
+  //   console.log(data);
+  // } catch (err) {
+  //   console.error('Error fetching reviews:', err);
+  // }
 
   const projects = await db.project.findMany({
     include: {

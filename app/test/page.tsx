@@ -4,7 +4,12 @@ import { shimmer, toBase64, wait } from '@/lib/utils';
 import Image from 'next/image';
 
 export default async function TestPage() {
-  return <FlexboxTest />;
+  return (
+    <div>
+      <p>Pushed to prod url</p>
+      <FlexboxTest />;
+    </div>
+  );
 }
 
 function FlexboxTest() {

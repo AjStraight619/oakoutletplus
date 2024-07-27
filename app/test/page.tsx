@@ -14,6 +14,7 @@ function FlexboxTest() {
 const Shimmer = () => (
   <div>
     <h1>Image Component With Shimmer Data URL</h1>
+    <h2>Pushed to prod url</h2>
     <Image
       alt="Mountains"
       src="/before-test.png"

@@ -1,3 +1,5 @@
+import { AppleCardsCarouselDemo } from '@/components/test/carousel-demo';
+import { InfiniteMovingCardsDemo } from '@/components/test/infinite-cards';
 import { shimmer, toBase64, wait } from '@/lib/utils';
 import Image from 'next/image';
 
@@ -6,16 +8,7 @@ export default async function TestPage() {
 }
 
 function FlexboxTest() {
-  return (
-    <div>
-      {/* <div className="flex container border rounded-md border-green-600">
-        <div className="flex-1 bg-blue-500 text-white">Flex 1</div>
-        <div className="flex-grow bg-green-500 text-white">Flex Grow</div>
-        <div className="flex-shrink-0 bg-red-500 text-white">Flex Shrink 0</div>
-      </div> */}
-      {/* <Shimmer /> */}
-    </div>
-  );
+  return <InfiniteMovingCardsDemo />;
 }
 
 const Shimmer = () => (

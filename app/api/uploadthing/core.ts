@@ -24,6 +24,8 @@ export const ourFileRouter = {
       // If you throw, the user will not be able to upload
       // if (!isValidAdmin) throw new UploadThingError('Unauthorized');
 
+      console.log('req: ', req);
+
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { input };
     })
@@ -32,10 +34,7 @@ export const ourFileRouter = {
       //   console.log('Upload complete for userId:', metadata.userId);
 
       //   console.log('file url', file.url);
-      console.log('File in onUploadComplete: ', file);
       const prefix = file.name.split('-')[0] as ImageType;
-      console.log('prefix: ', prefix);
-      console.log('meta data: ', metadata);
       const { input } = metadata;
       await createImagePair({
         pairId: input.pairId,

@@ -1,6 +1,9 @@
+import { ServicesGrid } from '@/components/landing-page/grid';
 import Hero from '@/components/landing-page/hero';
 import InfiniteImages from '@/components/landing-page/infinite-images';
 import Navbar from '@/components/landing-page/navbar';
+import { BentoGridThirdDemo } from '@/components/landing-page/test-grid';
+import { AppleCardsCarouselDemo } from '@/components/test/carousel-demo';
 import { db } from '@/lib/db';
 import { sharedMetadata } from '@/lib/shared-metadata';
 import { Metadata } from 'next';
@@ -57,11 +60,11 @@ export default async function Home() {
   console.log('Images: ', images);
 
   return (
-    <div className="relative flex items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
+    <div className="relative flex items-center overflow-hidden flex-col  mx-auto sm:px-10 px-5">
       <div className="max-w-7xl w-full">
-        <Navbar />
         <Hero />
-        <InfiniteImages />
+        <AppleCardsCarouselDemo />
+        <BentoGridThirdDemo />
       </div>
     </div>
   );

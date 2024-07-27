@@ -8,12 +8,12 @@ const Footer = () => {
   const pathname = usePathname();
   const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const userAgent =
-      typeof window.navigator === 'undefined' ? '' : navigator.userAgent;
-    const mobile = /iPhone|iPad|iPod|Android/i.test(userAgent);
-    setIsMobile(mobile);
-  }, []);
+  // useEffect(() => {
+  //   const userAgent =
+  //     typeof window.navigator === 'undefined' ? '' : navigator.userAgent;
+  //   const mobile = /iPhone|iPad|iPod|Android/i.test(userAgent);
+  //   setIsMobile(mobile);
+  // }, []);
 
   if (pathname.includes('/admin')) return null;
 

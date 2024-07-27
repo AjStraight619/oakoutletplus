@@ -106,6 +106,7 @@ const config = {
             transform: 'translate(-50%,-40%) scale(1)',
           },
         },
+
         shimmer: {
           from: {
             backgroundPosition: '0 0',
@@ -197,6 +198,10 @@ const config = {
       );
     },
   ],
+
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 } satisfies Config;
 
 function addVariablesForColors({ addBase, theme }: any) {

@@ -32,7 +32,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="h-16 border-b border-muted-foreground fixed top-0 left-0 right-0 w-full z-[999] ">
+    <nav className="h-16 border-b border-muted-foreground fixed top-0 left-0 right-0 w-full z-50  backdrop-blur-sm">
       <div className="flex flex-row items-center justify-between h-full gap-x-2 container relative">
         <div className="hidden sm:flex items-center gap-x-4 h-full">
           {/* <Logo /> */}

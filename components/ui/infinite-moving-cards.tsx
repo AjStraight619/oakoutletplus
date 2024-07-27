@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { cn, shimmer, toBase64 } from '@/lib/utils';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import {
@@ -107,11 +107,14 @@ export const InfiniteMovingCards = ({
               <AspectRatio ratio={16 / 9}>
                 <CardContent className="h-full flex items-center justify-center">
                   <Image
-                    src={item.imageUrl || '/before-test.png'}
+                    src={item.imageUrl || '/after-test.png'}
                     alt={item.name}
                     fill
                     quality={100}
-                    priority
+                    placeholder={`data:image/svg+xml;base64,${toBase64(
+                      shimmer(300, 400),
+                    )}`}
+                    loading="lazy"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover rounded-md"
                   />

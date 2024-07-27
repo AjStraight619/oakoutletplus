@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import SubmitButton from '@/components/ui/submit-button';
 import { LockIcon } from 'lucide-react';
 import { redirect } from 'next/navigation';
 
@@ -54,9 +55,7 @@ export default async function SignInPage() {
 
                 <Input name="password" type="password" placeholder="********" />
               </div>
-              <Button className="w-full" type="submit">
-                Sign In
-              </Button>
+              <SubmitButton>Sign In</SubmitButton>
             </div>
           </form>
         </CardContent>

@@ -9,12 +9,15 @@ import React, {
 import {
   IconArrowNarrowLeft,
   IconArrowNarrowRight,
+  IconArrowRightFromArc,
   IconX,
 } from '@tabler/icons-react';
 import { cn } from '@/lib/utils';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image, { ImageProps } from 'next/image';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 interface CarouselProps {
   items: JSX.Element[];
@@ -28,6 +31,7 @@ interface CarouselProps {
 type Card = {
   src: string;
   title: string;
+  projectId: string;
   category: string;
   content: React.ReactNode;
 };
@@ -291,12 +295,21 @@ export const Card = ({
               >
                 {card.category}
               </motion.p>
-              <motion.p
-                layoutId={layout ? `title-${card.title}` : undefined}
-                className="text-2xl md:text-5xl font-semibold text-neutral-700 mt-4 dark:text-white"
-              >
-                {card.title}
-              </motion.p>
+              <div className="flex items-center justify-between mt-4">
+                <motion.p
+                  layoutId={layout ? `title-${card.title}` : undefined}
+                  className="text-2xl md:text-5xl font-semibold text-neutral-700  dark:text-white"
+                >
+                  {card.title}
+                </motion.p>
+                <Link
+                  className="text-lg font-medium inline-flex group text-muted-foreground hover:text-primary duration-150"
+                  href={`projects/${card.projectId}`}
+                >
+                  See Project{' '}
+                  <ArrowRight className="group-hover:translate-x-2 group-hover:text-primary duration-150 w-6 h-6 ml-2 transition-all" />
+                </Link>
+              </div>
               <div className="py-10">{card.content}</div>
             </motion.div>
           </div>

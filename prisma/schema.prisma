@@ -20,7 +20,7 @@ model Project {
   id          String          @id @default(cuid())
   type        ProjectType
   title       String
-  images   ProjectImage[]
+  images      ProjectImage[]
   description String?         @db.Text
   updatedAt   DateTime        @updatedAt
   createdAt   DateTime        @default(now())
@@ -33,6 +33,7 @@ model ProjectImage {
   imageType   ImageType
   pairId      String?    
   standalone  Boolean    @default(false) 
+  isOnHomePage Boolean @default(false)
   projectId   String
   project     Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
   updatedAt   DateTime   @updatedAt

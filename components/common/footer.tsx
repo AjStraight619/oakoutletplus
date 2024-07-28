@@ -58,11 +58,15 @@ const Footer = () => {
             <h2 className="text-lg font-semibold mb-4">Follow Us</h2>
             <ul className="flex space-x-4">
               <li>
-                <a href="#" className="hover:underline">
+                <a
+                  href="https://www.facebook.com/oakoutletplus/"
+                  className="hover:underline"
+                  rel="noopener noreferrer"
+                >
                   <FaFacebook style={{ color: '#1877F2' }} size={24} />
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" className="hover:underline">
                   <FaTwitter
                     style={{
@@ -81,8 +85,8 @@ const Footer = () => {
                     size={24}
                   />
                 </a>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <a href="#" className="hover:underline">
                   <FaLinkedin
                     style={{
@@ -91,7 +95,7 @@ const Footer = () => {
                     size={24}
                   />
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
 

@@ -6,7 +6,7 @@ import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin';
 import { extractRouterConfig } from 'uploadthing/server';
 import { ourFileRouter } from './api/uploadthing/core';
 import { Toaster } from 'sonner';
-import Navbar from '@/components/landing-page/navbar';
+import Navbar from '@/components/common/navbar';
 import Footer from '@/components/common/footer';
 import { ThemeProvider } from './provider';
 import { sharedMetadata } from '@/lib/shared-metadata';
@@ -44,9 +44,7 @@ export default function RootLayout({
 
           <Navbar />
           <Toaster />
-          <main className="flex-grow">
-            <div className="pt-16">{children}</div>
-          </main>
+          <main className="min-h-[calc(100vh-4rem)]">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

@@ -1,4 +1,3 @@
-import { AppleCardsCarouselDemo } from '@/components/test/carousel-demo';
 import { InfiniteMovingCardsDemo } from '@/components/test/infinite-cards';
 import { shimmer, toBase64, wait } from '@/lib/utils';
 import Image from 'next/image';
@@ -7,7 +6,7 @@ export default async function TestPage() {
   return (
     <div>
       <p>Pushed to prod url</p>
-      <FlexboxTest />;
+      {/* <FlexboxTest />; */}
     </div>
   );
 }

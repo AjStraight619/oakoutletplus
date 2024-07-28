@@ -35,7 +35,6 @@ export default function AddImages({ projectId, projectTitle }: AddImagesProps) {
   const pathname = usePathname();
   const [files, setFiles] = useState<ImageFile[]>([]);
   const router = useRouter();
-  const [error, setError] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const bottomOfDialogRef = useRef<HTMLDivElement>(null);
 
@@ -55,11 +54,12 @@ export default function AddImages({ projectId, projectTitle }: AddImagesProps) {
         toast(<Progress value={p} />, { id: 'progress' });
       },
       onClientUploadComplete: res => {
+        console.log('Response in onClientUploadComplete: ', res);
         toast.dismiss('progress');
-        toast('Successfully uploaded files!', { duration: 1 });
+        toast.success('Successfully uploaded files!');
         setFiles([]);
         setIsOpen(false);
-        router.refresh();
+        // router.refresh();
       },
       onBeforeUploadBegin: uploadFiles => {
         return uploadFiles.map(
@@ -73,7 +73,7 @@ export default function AddImages({ projectId, projectTitle }: AddImagesProps) {
       },
       onUploadError: err => {
         console.error(err);
-        setError(err.message);
+        toast.error('Something went wrong while uploading');
       },
     });
 
@@ -83,7 +83,7 @@ export default function AddImages({ projectId, projectTitle }: AddImagesProps) {
     },
     onClientUploadComplete: res => {
       toast.dismiss('progress');
-      toast('Successfully uploaded files!', { duration: 1 });
+      toast('Successfully uploaded files!');
       setFiles([]);
       setIsOpen(false);
 
@@ -101,7 +101,6 @@ export default function AddImages({ projectId, projectTitle }: AddImagesProps) {
     },
     onUploadError: err => {
       console.error(err);
-      setError(err.message);
     },
   });
 

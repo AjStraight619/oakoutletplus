@@ -16,7 +16,7 @@ import { redirect } from 'next/navigation';
 export default async function SignInPage() {
   let error = null;
   return (
-    <div className="h-screen flex items-center justify-center w-full">
+    <div className="flex items-center justify-center min-h-screen px-4">
       <Card className="w-full sm:w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4">
         <CardHeader>
           <CardTitle>
@@ -55,7 +55,7 @@ export default async function SignInPage() {
 
                 <Input name="password" type="password" placeholder="********" />
               </div>
-              <SubmitButton>Sign In</SubmitButton>
+              <SubmitButton className="w-full">Sign In</SubmitButton>
             </div>
           </form>
         </CardContent>

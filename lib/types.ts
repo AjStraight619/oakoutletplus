@@ -1,4 +1,4 @@
-import { ImageType, ProjectImage } from '@prisma/client';
+import { ImageType, Project, ProjectImage } from '@prisma/client';
 import { type ProjectImage as PrismaProjectImage } from '@prisma/client';
 
 export type PairedProjectImages = {
@@ -23,3 +23,5 @@ export type Result<T> = {
   message: string;
   data?: T;
 };
+
+export type ProjectWithImages = Project & { images: ProjectImage[] };

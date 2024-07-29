@@ -1,12 +1,13 @@
+import OldOrder from '@/components/dashboard/old-order';
+import ReorderItems from '@/components/dashboard/reorder';
 import { InfiniteMovingCardsDemo } from '@/components/test/infinite-cards';
 import { shimmer, toBase64, wait } from '@/lib/utils';
 import Image from 'next/image';
 
 export default async function TestPage() {
   return (
-    <div>
-      <p>Pushed to prod url</p>
-      {/* <FlexboxTest />; */}
+    <div className="flex flex-col min-h-screen items-center justify-center">
+      <ReorderItems />
     </div>
   );
 }

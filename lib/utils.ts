@@ -8,6 +8,7 @@ import {
   PrismaProject,
 } from './types';
 import { Project, ProjectImage } from '@prisma/client';
+import { nanoid } from 'nanoid';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -107,3 +108,41 @@ export const toBase64 = (str: string) =>
   typeof window === 'undefined'
     ? Buffer.from(str).toString('base64')
     : window.btoa(str);
+
+export function arrayMoveMutable(
+  array: any[],
+  fromIndex: number,
+  toIndex: number,
+) {
+  const startIndex = fromIndex < 0 ? array.length + fromIndex : fromIndex;
+
+  if (startIndex >= 0 && startIndex < array.length) {
+    const endIndex = toIndex < 0 ? array.length + toIndex : toIndex;
+
+    const [item] = array.splice(fromIndex, 1);
+    array.splice(endIndex, 0, item);
+  }
+}
+
+export function arrayMoveImmutable(
+  array: any[],
+  fromIndex: number,
+  toIndex: number,
+) {
+  array = [...array];
+  arrayMoveMutable(array, fromIndex, toIndex);
+  return array;
+}
+
+export function clamp(min: number, max: number, v: number) {
+  return Math.min(Math.max(v, min), max);
+}
+
+export function distance(a: number, b: number) {
+  console.log('distance: ', a, b);
+  return Math.abs(a - b);
+}
+
+export const getImagePairId = () => {
+  return nanoid();
+};

@@ -25,3 +25,12 @@ export type Result<T> = {
 };
 
 export type ProjectWithImages = Project & { images: ProjectImage[] };
+
+export interface Position {
+  top: number;
+  left: number;
+  width: number;
+  height: number;
+}
+
+export type InitialState = { id: number; height: number; width: number }[];

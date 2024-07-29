@@ -59,7 +59,7 @@ export default function AddImage({
             onChange={handleFileChange}
             hidden
             className="absolute inset-0 h-full w-full opacity-0 cursor-pointer"
-            multiple={false}
+            multiple={imageType === 'StandAlone' ? true : false}
           />
         </div>
       )}

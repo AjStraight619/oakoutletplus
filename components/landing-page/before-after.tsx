@@ -85,6 +85,7 @@ const Content = ({
         {description}
       </p>
       <div className="pt-6 space-y-2">
+        <h4 className="h4 text-center">Before</h4>
         <Image
           src={beforeImageUrl}
           alt="Before Image"
@@ -92,6 +93,7 @@ const Content = ({
           width="500"
           className="md:w-1/2 md:h-1/2 h-full w-full mx-auto object-contain rounded-md"
         />
+        <h4 className="h4 text-center">After</h4>
         <Image
           src={afterImageUrl}
           alt="After Image"
@@ -159,43 +161,3 @@ const generateBeforeAfterData = (
 
   return data;
 };
-
-// const data = [
-//   {
-//     category: 'Artificial Intelligence',
-//     title: 'You can do more with AI.',
-//     src: '/after-test.png',
-//     content: <DummyContent />,
-//   },
-//   {
-//     category: 'Productivity',
-//     title: 'Enhance your productivity.',
-//     src: '/after-test.png',
-//     content: <DummyContent />,
-//   },
-//   {
-//     category: 'Product',
-//     title: 'Launching the new Apple Vision Pro.',
-//     src: '/after-test.png',
-//     content: <DummyContent />,
-//   },
-
-//   {
-//     category: 'Product',
-//     title: 'Maps for your iPhone 15 Pro Max.',
-//     src: '/after-test.png',
-//     content: <DummyContent />,
-//   },
-//   {
-//     category: 'iOS',
-//     title: 'Photography just got better.',
-//     src: '/after-test.png',
-//     content: <DummyContent />,
-//   },
-//   {
-//     category: 'Hiring',
-//     title: 'Hiring for a Staff Software Engineer',
-//     src: '/after-test.png',
-//     content: <DummyContent />,
-//   },
-// ];

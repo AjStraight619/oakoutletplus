@@ -62,6 +62,9 @@ export default function AddImages({ projectId, projectTitle }: AddImagesProps) {
         // router.refresh();
       },
       onBeforeUploadBegin: uploadFiles => {
+        uploadFiles.forEach(file => {
+          console.log('File size: ', file.size);
+        });
         return uploadFiles.map(
           f =>
             new File(

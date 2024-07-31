@@ -30,18 +30,26 @@ export default async function Home() {
     },
   });
 
-  const images = projects.map(proj => proj.images.map(img => img));
+  const images = projects.map(proj => proj.images).flat();
 
-  console.log('Projects: ', projects);
-
-  console.log('Images: ', images);
+  const refinishImages = projects
+    .filter(proj => proj.type === 'Refinish')
+    .map(refinish => refinish.images.filter(img => img.imageType === 'After'))
+    .flat();
+  const remodelImages = projects
+    .filter(proj => proj.type === 'Remodel')
+    .map(remodel => remodel.images.filter(img => img.imageType === 'After'))
+    .flat();
 
   return (
     <div className="relative flex items-center overflow-hidden flex-col mx-auto sm:px-10 px-5 pt-16">
       <div className="max-w-7xl w-full">
         <Hero />
         <BeforeAfter />
-        <BentoGridThirdDemo />
+        <BentoGridThirdDemo
+          refinishImages={refinishImages}
+          remodelImages={remodelImages}
+        />
       </div>
     </div>
   );

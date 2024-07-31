@@ -2,17 +2,86 @@
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { BentoGrid, BentoGridItem } from '../ui/bento-grid';
-import {
-  IconBoxAlignRightFilled,
-  IconClipboardCopy,
-  IconFileBroken,
-  IconSignature,
-  IconTableColumn,
-} from '@tabler/icons-react';
+import { IconBoxAlignRightFilled } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { BrushIcon, GiftIcon, HammerIcon, StarIcon } from 'lucide-react';
+import { reviews } from '@/lib/test-data';
+import { FB_REVIEW_PAGE } from '@/lib/constants';
+import { ProjectImage } from '@prisma/client';
+import SlickCarousel from './slick-carousel';
 
-export function BentoGridThirdDemo() {
+type BentoGridThirdDemoProps = {
+  refinishImages: ProjectImage[];
+  remodelImages: ProjectImage[];
+};
+
+export function BentoGridThirdDemo({
+  refinishImages,
+  remodelImages,
+}: BentoGridThirdDemoProps) {
+  const items = [
+    {
+      title: 'Refinishes',
+      description: (
+        <span className="text-sm">
+          Restore the beauty of your kitchen cabinets and surfaces with our
+          expert refinishing services.
+        </span>
+      ),
+      header: <Refinishes refinishImages={refinishImages} />,
+      className: 'md:col-span-1',
+      icon: <BrushIcon className="h-4 w-4 text-neutral-500" />,
+    },
+    {
+      title: 'Remodels',
+      description: (
+        <span className="text-sm">
+          Transform your kitchen with our comprehensive remodeling services,
+          tailored to your vision.
+        </span>
+      ),
+      header: <SkeletonTwo />,
+      className: 'md:col-span-1',
+      icon: <HammerIcon className="h-4 w-4 text-neutral-500" />,
+    },
+    {
+      title: 'Personalized Items',
+      description: (
+        <span className="text-sm">
+          Add a unique touch to your kitchen with custom-designed items that
+          reflect your style.
+        </span>
+      ),
+      header: <SkeletonThree />,
+      className: 'md:col-span-1',
+      icon: <GiftIcon className="h-4 w-4 text-neutral-500" />,
+    },
+    {
+      title: 'Customer Reviews',
+      description: (
+        <span className="text-sm">
+          See what our customers are saying about us.
+        </span>
+      ),
+      header: <Reviews />,
+      className: 'md:col-span-2',
+      icon: <StarIcon className="h-4 w-4 text-neutral-500" />,
+    },
+
+    {
+      title: 'Text Summarization',
+      description: (
+        <span className="text-sm">
+          Summarize your lengthy documents with AI technology.
+        </span>
+      ),
+      header: <SkeletonFive />,
+      className: 'md:col-span-1',
+      icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
+    },
+  ];
+
   return (
     <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem] pb-8">
       {items.map((item, i) => (
@@ -29,7 +98,10 @@ export function BentoGridThirdDemo() {
   );
 }
 
-const SkeletonOne = () => {
+const Refinishes = ({ refinishImages }: { refinishImages: ProjectImage[] }) => {
+  const refinishImageUrls = refinishImages.map(refinish => refinish.imageUrl);
+
+  console.log('Refinish images: ', refinishImageUrls);
   const variants = {
     initial: {
       x: 0,
@@ -61,12 +133,14 @@ const SkeletonOne = () => {
       whileHover="animate"
       className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
     >
-      <motion.div
+      <SlickCarousel imageUrls={refinishImageUrls} />
+
+      {/* <motion.div
         variants={variants}
         className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-white dark:bg-black"
       >
         <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
+        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900"></div>
       </motion.div>
       <motion.div
         variants={variantsSecond}
@@ -81,7 +155,7 @@ const SkeletonOne = () => {
       >
         <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
         <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
-      </motion.div>
+      </motion.div> */}
     </motion.div>
   );
 };
@@ -154,7 +228,7 @@ const SkeletonThree = () => {
     </motion.div>
   );
 };
-const SkeletonFour = () => {
+const Reviews = () => {
   const first = {
     initial: {
       x: 20,
@@ -182,57 +256,34 @@ const SkeletonFour = () => {
       whileHover="hover"
       className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-row space-x-2"
     >
-      <motion.div
-        variants={first}
-        className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
-      >
-        <Image
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
-        />
-        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
-          Just code in Vanilla Javascript
-        </p>
-        <p className="border border-red-500 bg-red-100 dark:bg-red-900/20 text-red-600 text-xs rounded-full px-2 py-0.5 mt-4">
-          Delusional
-        </p>
-      </motion.div>
-      <motion.div className="h-full relative z-20 w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center">
-        <Image
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
-        />
-        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
-          Tailwind CSS is cool, you know
-        </p>
-        <p className="border border-green-500 bg-green-100 dark:bg-green-900/20 text-green-600 text-xs rounded-full px-2 py-0.5 mt-4">
-          Sensible
-        </p>
-      </motion.div>
-      <motion.div
-        variants={second}
-        className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
-      >
-        <Image
-          src="https://pbs.twimg.com/profile_images/1417752099488636931/cs2R59eW_400x400.jpg"
-          alt="avatar"
-          height="100"
-          width="100"
-          className="rounded-full h-10 w-10"
-        />
-        <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 mt-4">
-          I love angular, RSC, and Redux.
-        </p>
-        <p className="border border-orange-500 bg-orange-100 dark:bg-orange-900/20 text-orange-600 text-xs rounded-full px-2 py-0.5 mt-4">
-          Helpless
-        </p>
-      </motion.div>
+      {reviews.map((review, idx) => (
+        <motion.a
+          key={idx}
+          href={FB_REVIEW_PAGE}
+          target="_blank"
+          rel="noopener noreferrer"
+          variants={idx === 0 ? first : idx === 2 ? second : {}}
+          className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center"
+        >
+          <div className="flex items-center space-x-4">
+            <Image
+              src={review.imageUrl}
+              alt="avatar"
+              height="40"
+              width="40"
+              className="rounded-full"
+            />
+            <h5 className="text-sm font-bold text-neutral-700 dark:text-neutral-300">
+              {review.name}
+            </h5>
+          </div>
+          <div className="flex-grow flex items-center justify-center mt-4">
+            <p className="sm:text-sm text-xs text-center font-semibold text-neutral-500 line-clamp-3">
+              {review.review}
+            </p>
+          </div>
+        </motion.a>
+      ))}
     </motion.div>
   );
 };
@@ -294,61 +345,3 @@ const SkeletonFive = () => {
     </motion.div>
   );
 };
-const items = [
-  {
-    title: 'AI Content Generation',
-    description: (
-      <span className="text-sm">
-        Experience the power of AI in generating unique content.
-      </span>
-    ),
-    header: <SkeletonOne />,
-    className: 'md:col-span-1',
-    icon: <IconClipboardCopy className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: 'Automated Proofreading',
-    description: (
-      <span className="text-sm">
-        Let AI handle the proofreading of your documents.
-      </span>
-    ),
-    header: <SkeletonTwo />,
-    className: 'md:col-span-1',
-    icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: 'Contextual Suggestions',
-    description: (
-      <span className="text-sm">
-        Get AI-powered suggestions based on your writing context.
-      </span>
-    ),
-    header: <SkeletonThree />,
-    className: 'md:col-span-1',
-    icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
-  },
-  {
-    title: 'Sentiment Analysis',
-    description: (
-      <span className="text-sm">
-        Understand the sentiment of your text with AI analysis.
-      </span>
-    ),
-    header: <SkeletonFour />,
-    className: 'md:col-span-2',
-    icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
-  },
-
-  {
-    title: 'Text Summarization',
-    description: (
-      <span className="text-sm">
-        Summarize your lengthy documents with AI technology.
-      </span>
-    ),
-    header: <SkeletonFive />,
-    className: 'md:col-span-1',
-    icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
-  },
-];

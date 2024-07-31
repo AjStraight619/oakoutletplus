@@ -21,6 +21,7 @@ import { useCharCount } from '@/hooks/useCharCount';
 import { MAX_CHAR_COUNT } from '@/lib/constants';
 import { wait } from '@/lib/utils';
 import { updateProject } from '@/actions/project';
+import { Label } from '../ui/label';
 
 type EditedFormFields = {
   title: string;
@@ -140,21 +141,30 @@ const EditProject = ({
         <DialogDescription></DialogDescription>
         <div className="space-y-6">
           <form className="space-y-4" action={handleEditProject}>
-            <Input
-              name="title"
-              value={formFields?.title || ''}
-              onChange={handleFormFieldsChange}
-              placeholder="Project Title"
-            />
-            <div className="relative">
-              <Textarea
-                id="description"
-                value={formFields.description}
-                onChange={e => handleFormFieldsChange(e)}
-                name="description"
-                placeholder="Give a description of the project..."
-                maxLength={150}
+            <div className="space-y-2">
+              <Label htmlFor="Title">Title</Label>
+              <Input
+                name="title"
+                value={formFields?.title || ''}
+                onChange={handleFormFieldsChange}
+                placeholder="Project Title"
               />
+            </div>
+            <div className="relative">
+              <div className="space-y-2">
+                <Label htmlFor="description">
+                  Project Description{' '}
+                  <span className="text-muted-foreground"> (Optional)</span>
+                </Label>
+                <Textarea
+                  id="description"
+                  value={formFields.description}
+                  onChange={e => handleFormFieldsChange(e)}
+                  name="description"
+                  placeholder="Give a description of the project..."
+                  maxLength={150}
+                />
+              </div>
               <div className="absolute bottom-2 right-2 text-muted-foreground text-xs">
                 {charCount}
               </div>

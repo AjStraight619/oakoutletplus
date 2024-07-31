@@ -3,11 +3,12 @@ import ReorderItems from '@/components/dashboard/reorder';
 import { InfiniteMovingCardsDemo } from '@/components/test/infinite-cards';
 import { shimmer, toBase64, wait } from '@/lib/utils';
 import Image from 'next/image';
+import SlickCarousel from './slick-carousel';
 
 export default async function TestPage() {
   return (
     <div className="flex flex-col min-h-screen items-center justify-center">
-      <ReorderItems />
+      <SlickCarousel />
     </div>
   );
 }

@@ -12,7 +12,7 @@ export const metadata = {
   },
 };
 const AboutPage = () => {
-  return <div>AboutPage</div>;
+  return <div className="">AboutPage</div>;
 };
 
 export default AboutPage;

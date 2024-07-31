@@ -41,7 +41,7 @@ export function BentoGridThirdDemo({
           tailored to your vision.
         </span>
       ),
-      header: <SkeletonTwo />,
+      header: <Remodels remodelImages={remodelImages} />,
       className: 'md:col-span-1',
       icon: <HammerIcon className="h-4 w-4 text-neutral-500" />,
     },
@@ -69,17 +69,17 @@ export function BentoGridThirdDemo({
       icon: <StarIcon className="h-4 w-4 text-neutral-500" />,
     },
 
-    {
-      title: 'Text Summarization',
-      description: (
-        <span className="text-sm">
-          Summarize your lengthy documents with AI technology.
-        </span>
-      ),
-      header: <SkeletonFive />,
-      className: 'md:col-span-1',
-      icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
-    },
+    // {
+    //   title: 'Text Summarization',
+    //   description: (
+    //     <span className="text-sm">
+    //       Summarize your lengthy documents with AI technology.
+    //     </span>
+    //   ),
+    //   header: <SkeletonFive />,
+    //   className: 'md:col-span-1',
+    //   icon: <IconBoxAlignRightFilled className="h-4 w-4 text-neutral-500" />,
+    // },
   ];
 
   return (
@@ -131,7 +131,7 @@ const Refinishes = ({ refinishImages }: { refinishImages: ProjectImage[] }) => {
     <motion.div
       initial="initial"
       whileHover="animate"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full min-h-[9rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
     >
       <SlickCarousel imageUrls={refinishImageUrls} />
 
@@ -159,7 +159,7 @@ const Refinishes = ({ refinishImages }: { refinishImages: ProjectImage[] }) => {
     </motion.div>
   );
 };
-const SkeletonTwo = () => {
+const Remodels = ({ remodelImages }: { remodelImages: ProjectImage[] }) => {
   const variants = {
     initial: {
       width: 0,
@@ -178,14 +178,16 @@ const SkeletonTwo = () => {
     },
   };
   const arr = new Array(6).fill(0);
+  const remodelImageUrls = remodelImages.map(refinish => refinish.imageUrl);
   return (
     <motion.div
       initial="initial"
       animate="animate"
       whileHover="hover"
-      className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
+      className="flex flex-1 w-full h-full min-h-[9rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
     >
-      {arr.map((_, i) => (
+      <SlickCarousel imageUrls={remodelImageUrls} />
+      {/* {arr.map((_, i) => (
         <motion.div
           key={'skelenton-two' + i}
           variants={variants}
@@ -194,7 +196,7 @@ const SkeletonTwo = () => {
           }}
           className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-neutral-100 dark:bg-black w-full h-4"
         ></motion.div>
-      ))}
+      ))} */}
     </motion.div>
   );
 };
@@ -228,6 +230,7 @@ const SkeletonThree = () => {
     </motion.div>
   );
 };
+
 const Reviews = () => {
   const first = {
     initial: {
@@ -249,10 +252,16 @@ const Reviews = () => {
       rotate: 0,
     },
   };
+
+  const isMobile = () => {
+    if (typeof window === 'undefined') return;
+    return window.innerWidth < 768;
+  };
+
   return (
     <motion.div
-      initial="initial"
-      animate="animate"
+      // initial="initial"
+      // animate="animate"
       whileHover="hover"
       className="flex flex-1 w-full h-full min-h-[6rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-row space-x-2"
     >
@@ -262,10 +271,12 @@ const Reviews = () => {
           href={FB_REVIEW_PAGE}
           target="_blank"
           rel="noopener noreferrer"
-          variants={idx === 0 ? first : idx === 2 ? second : {}}
-          className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center"
+          variants={
+            isMobile() ? {} : idx === 0 ? first : idx === 2 ? second : {}
+          }
+          className="h-full w-1/3 rounded-2xl bg-white p-4 dark:bg-black dark:border-white/[0.1] border border-neutral-200 flex flex-col items-center justify-center"
         >
-          <div className="flex items-center space-x-4">
+          <div className="flex sm:flex-row flex-col justify-center items-center sm:space-x-4">
             <Image
               src={review.imageUrl}
               alt="avatar"

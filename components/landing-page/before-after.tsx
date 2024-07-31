@@ -44,7 +44,7 @@ export async function BeforeAfter() {
   ));
 
   return (
-    <div className="w-full h-full py-20">
+    <div className="w-full h-full py-10 sm:py-20">
       <h2 className="max-w-7xl pl-4 mx-auto text-xl md:text-4xl font-bold text-black  font-sans">
         Some of our finished projects.
       </h2>

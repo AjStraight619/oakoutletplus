@@ -7,25 +7,8 @@ import Logo from '../landing-page/logo';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-
-const navLinks = [
-  {
-    label: 'Home',
-    link: '/',
-  },
-  {
-    label: 'About',
-    link: '/about',
-  },
-  {
-    label: 'Services',
-    link: '/services',
-  },
-  {
-    label: 'Contact',
-    link: '/contact',
-  },
-];
+import { navLinks } from '@/lib/constants';
+import MobileNav from './mobile-nav';
 
 export default function Navbar() {
   const [isOpen, setOpen] = useState(false);
@@ -60,11 +43,7 @@ export default function Navbar() {
             ))}
           </ul>
         </div>
-        <div className="block sm:hidden">
-          <Button size="icon" variant="ghost" onClick={() => setOpen(!isOpen)}>
-            <MenuIcon />
-          </Button>
-        </div>
+        <MobileNav />
         {!pathname.includes('/admin') && (
           <Button asChild>
             <Link href="/admin/dashboard">Admin</Link>

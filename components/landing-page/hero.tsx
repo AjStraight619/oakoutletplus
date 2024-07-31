@@ -3,7 +3,7 @@ import { TextGenerateEffect } from '../ui/text-generate-effect';
 
 const Hero = () => {
   return (
-    <div className="sm:pb-20 pb-12 pt-8">
+    <div className="sm:pb-20 pb-8 sm:pt-8 pt-4">
       <h1 className="heading h1 self-center font-light text-black">
         Oak Outlet Plus
       </h1>

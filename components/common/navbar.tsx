@@ -19,17 +19,21 @@ export default function Navbar() {
       <div className="flex flex-row items-center justify-between h-full gap-x-2 container relative">
         <div className="hidden sm:flex items-center gap-x-4 h-full">
           {/* <Logo /> */}
-          <ul className="flex items-center gap-x-4  h-full">
+          <ul className="flex items-center gap-x-4 h-full">
             {navLinks.map((item, idx) => (
-              <motion.li key={idx} layout>
+              <motion.li className="group" key={idx} layout>
                 <Link
                   href={item.link}
-                  className="flex flex-col items-center pb-2 relative h-full mt-8"
+                  className={`flex flex-col items-center pb-2 relative h-full mt-8 hover:text-black group-hover:text-black transition-colors duration-150 ${
+                    pathname === item.link
+                      ? 'text-black'
+                      : 'text-muted-foreground'
+                  }`}
                 >
                   {item.label}
                   {pathname === item.link && (
                     <motion.div
-                      className="absolute bottom-[-1px] left-0 right-0 h-[3px] bg-primary"
+                      className="absolute bottom-[-1px] left-0 right-0 h-[2px] bg-primary "
                       layoutId="underline"
                       transition={{
                         type: 'spring',

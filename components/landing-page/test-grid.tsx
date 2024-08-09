@@ -10,6 +10,7 @@ import { reviews } from '@/lib/test-data';
 import { FB_REVIEW_PAGE } from '@/lib/constants';
 import { ProjectImage } from '@prisma/client';
 import SlickCarousel from './slick-carousel';
+import SectionHeading from '../ui/section-heading';
 
 type BentoGridThirdDemoProps = {
   refinishImages: ProjectImage[];
@@ -83,18 +84,23 @@ export function BentoGridThirdDemo({
   ];
 
   return (
-    <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem] pb-8">
-      {items.map((item, i) => (
-        <BentoGridItem
-          key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          className={cn('[&>p:text-lg]', item.className)}
-          icon={item.icon}
-        />
-      ))}
-    </BentoGrid>
+    <section className="mb-16">
+      <SectionHeading>
+        Explore Our Expertise & Customer Satisfaction
+      </SectionHeading>
+      <BentoGrid className="max-w-4xl mx-auto md:auto-rows-[20rem] py-10 md:py-16">
+        {items.map((item, i) => (
+          <BentoGridItem
+            key={i}
+            title={item.title}
+            description={item.description}
+            header={item.header}
+            className={cn('[&>p:text-lg]', item.className)}
+            icon={item.icon}
+          />
+        ))}
+      </BentoGrid>
+    </section>
   );
 }
 
@@ -134,28 +140,6 @@ const Refinishes = ({ refinishImages }: { refinishImages: ProjectImage[] }) => {
       className="flex flex-1 w-full h-full min-h-[9rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
     >
       <SlickCarousel imageUrls={refinishImageUrls} />
-
-      {/* <motion.div
-        variants={variants}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-white dark:bg-black"
-      >
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900"></div>
-      </motion.div>
-      <motion.div
-        variants={variantsSecond}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 w-3/4 ml-auto bg-white dark:bg-black"
-      >
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
-      </motion.div>
-      <motion.div
-        variants={variants}
-        className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2 items-center space-x-2 bg-white dark:bg-black"
-      >
-        <div className="h-6 w-6 rounded-full bg-gradient-to-r from-pink-500 to-violet-500 flex-shrink-0" />
-        <div className="w-full bg-gray-100 h-4 rounded-full dark:bg-neutral-900" />
-      </motion.div> */}
     </motion.div>
   );
 };
@@ -177,7 +161,6 @@ const Remodels = ({ remodelImages }: { remodelImages: ProjectImage[] }) => {
       },
     },
   };
-  const arr = new Array(6).fill(0);
   const remodelImageUrls = remodelImages.map(refinish => refinish.imageUrl);
   return (
     <motion.div
@@ -187,16 +170,6 @@ const Remodels = ({ remodelImages }: { remodelImages: ProjectImage[] }) => {
       className="flex flex-1 w-full h-full min-h-[9rem] dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-col space-y-2"
     >
       <SlickCarousel imageUrls={remodelImageUrls} />
-      {/* {arr.map((_, i) => (
-        <motion.div
-          key={'skelenton-two' + i}
-          variants={variants}
-          style={{
-            maxWidth: Math.random() * (100 - 40) + 40 + '%',
-          }}
-          className="flex flex-row rounded-full border border-neutral-100 dark:border-white/[0.2] p-2  items-center space-x-2 bg-neutral-100 dark:bg-black w-full h-4"
-        ></motion.div>
-      ))} */}
     </motion.div>
   );
 };

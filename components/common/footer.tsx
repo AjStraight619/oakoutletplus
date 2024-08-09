@@ -45,11 +45,11 @@ const Footer = () => {
                   Services
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="/contact" className="hover:underline">
                   Contact
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -100,7 +100,7 @@ const Footer = () => {
           </div>
 
           {/* Contact Information */}
-          <div className="w-full md:w-1/3 mb-6 md:mb-0">
+          <div id="contact" className="w-full md:w-1/3 mb-6 md:mb-0">
             <h2 className="text-lg font-semibold mb-4">Contact Us</h2>
             <p>
               Email:{' '}

@@ -30,8 +30,6 @@ export default async function Home() {
     },
   });
 
-  const images = projects.map(proj => proj.images).flat();
-
   const refinishImages = projects
     .filter(proj => proj.type === 'Refinish')
     .map(refinish => refinish.images.filter(img => img.imageType === 'After'))

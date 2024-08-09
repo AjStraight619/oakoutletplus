@@ -47,7 +47,7 @@ export default async function SignInPage() {
                 <Input
                   name="email"
                   type="email"
-                  placeholder="Nik@oakoutletplus.com"
+                  placeholder="admin@oakoutletplus.com"
                 />
               </div>
               <div className="flex flex-col gap-y-1">

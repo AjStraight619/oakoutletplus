@@ -4,7 +4,6 @@ import { Carousel, Card } from '@/components/ui/apple-cards-carousel';
 import { db } from '@/lib/db';
 import { ProjectWithImages } from '@/lib/types';
 import SectionHeading from '../ui/section-heading';
-import SectionSubHeading from '../ui/section-sub-heading';
 
 export async function BeforeAfter() {
   const projects = await db.project.findMany({
@@ -47,9 +46,6 @@ export async function BeforeAfter() {
     <section className="mb-12">
       <div className="space-y-2">
         <SectionHeading>Some of Our Recent Projects</SectionHeading>
-        {/* <SectionSubHeading>
-          Click on an image to view the before & after
-        </SectionSubHeading> */}
       </div>
       <Carousel items={cards} />
     </section>
